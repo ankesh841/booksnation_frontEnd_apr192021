@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-sm navbar-dark langaraColor">
+  <a class="navbar-brand" href="/home">BooksNation</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
+    aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExample03">
+    <ul class="navbar-nav ml-auto ">
+
+      <li class="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+
+        <a class="nav-link" routerLink='/home' style="color:white">
+
+          <button mat-stroked-button>
+
+
+            <i class="fa fa-edit"></i> Buy Book</button>
+        </a>
+
+      </li>
+
+      <li class="nav-item " data-toggle="collapse" data-target=".navbar-collapse.show">
+
+        <a class="nav-link" routerLink='/postBook/postBySearch' style="color:white">
+          <button mat-stroked-button>
+            <i class="fa fa-book"></i> Sell Book</button>
+        </a>
+
+
+
+      </li>
+
+      <li *ngIf="showingLogOut" class="nav-item  dropdown" data-toggle="collapse" data-target=".navbar-collapse.show">
+        <a class="nav-link dropdown-toggle" href="http://example.com" style="color:white" id="dropdown03"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button mat-stroked-button>
+            <i class="fa fa-user"></i> My Account</button>
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown03">
+          <a class="dropdown-item" routerLink='/postedBooks'>Posted Books</a>
+
+          <a class="dropdown-item" href="#" (click)="logOut();"><i class="fa fa-sign-out"></i> Sign Out</a>
+
+        </div>
+
+
+      </li>
+
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,396 @@
+<div>
+  <div class="container" style="margin-top: 30px">
+    <div class="card  margin_bottom">
+      <div class="card-body">
+        <p id="search_text" class="display-3">
+          <span style="font-size:1.5em">
+            <strong> Buy or Sell used College Textbooks </strong>
+            <br>
+            With in College Campus.
+            <br>
+          </span>
+        </p>
+        Setup your own time to meet the buyer or seller in the campus.
+        <br>
+        <p class="mt-2">No more Clicking pictures for selling books.</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="card">
+      <p class="display-4 text-center card-header" style="font-size:1.6em">Search Available College Books</p>
+      <div class="card-body">
+        <div>
+          <div class="container-fluid my-3 ">
+            <div class="row">
+              <div id="hideee" class="col-md-9 col-sm-12 col-xs-12 text-center">
+                <mat-form-field class="width_" appearance="outline">
+                  <mat-label>Search your book here</mat-label>
+                  <input matInput placeholder="Book name, isbn, dep name or course number" #search_
+                    (keyup.enter)="filter()" [(ngModel)]="searchQuery_" autocomplete="off" (blur)="hideKeyboard()">
+                  <button class="btn btn-outline-dark" style="margin-top:-19px" matSuffix aria-label="search"
+                    (click)="filter()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </mat-form-field>
+                <!-- <ais-search-box style="height:67px" placeholder="Enter Book name or Isbn" [searchAsYouType]="false"
+                    [autofocus]="true">
+                  </ais-search-box> -->
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Filter Results</mat-label>
+                  <mat-select (selectionChange)="filter()" name="filte" [(ngModel)]="filterValue">
+                    <mat-option value="submittedBooks_lowToHigh">by price </mat-option>
+                    <mat-option value="submittedBooks">by Date </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <!-- <ais-sort-by [items]="[        
+                   { value: 'submittedBooks_lowToHigh', label: 'Sort by Price' },
+                   { value: 'submittedBooks', label: 'Sort by Date' }
+                   ]">
+                  </ais-sort-by> -->
+            </div>
+          </div>
+        </div>
+        <mat-progress-bar mode="query" *ngIf="showProgressBar">
+        </mat-progress-bar>
+      </div>
+    </div>
+  </div>
+  <!-- showing all available books -->
+  <div class="container mt-4">
+    <div class="card">
+      <p class="display-4 text-center card-header " style=" font-size:1.6em">Showing Available College Books</p>
+      <div id="style-1" style="overflow-y: scroll; height: 450px;">
+        <div *ngFor="let item of showing_all_available_books ; let i = index" class=" mt-3">
+          <div class="card">
+            <div id="search_text" class="card-header">
+              <div class="row">
+                <div class="col">
+                  <p class="ml-2">
+                    <strong> Avialable</strong> #{{showing_all_available_books[i].numberOfCopies}} - Result - {{i+1}}
+                  </p>
+                </div>
+                <!-- <div class="col">
+              <p class="mr-2 text-right">
+              </p>
+            </div> -->
+              </div>
+            </div>
+            <div class="card-body row">
+              <div class="col-md-8 col-sm-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-7 col-sm-5 col-xs-4  my-4 ">
+                        <p style="font-size: 1.4em">
+                          <strong>Title: </strong> {{showing_all_available_books[i].title}}
+                        </p>
+                        <strong>Department: </strong>{{showing_all_available_books[i].department}}
+                        <br>
+                        <strong>Course: </strong>{{showing_all_available_books[i].course}}
+                        <br>
+                        <strong> Isbn: </strong>
+                        {{showing_all_available_books[i].isbn}}
+                        <br>
+                        <strong>Authors: </strong>{{showing_all_available_books[i].authors}}
+                        <br>
+                        <strong>Condition: </strong>{{showing_all_available_books[i].condition}}
+                        <br>
+                        <strong>Description: </strong>{{showing_all_available_books[i].description}}
+                      </div>
+                      <div class="my-4 mx-auto">
+                        <img src={{showing_all_available_books[i].image}}>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- recaptcha-->
+              <!--             
+              <div class="col-md-4 col-sm-8  mt-5">
+                <strong style="font-size:1.3em"> Price: {{showing_all_available_books[i].price}} <i
+                    class="fa fa-dollar"></i> </strong>
+                <div class="mx-auto">
+                  <div>Posted on: {{showing_all_available_books[i].postedDate}} </div>
+                  <div style="display:none " id="{{showing_all_available_books[i].childValue}}_captcha2">
+                    <re-captcha data-size="compact"
+                      (resolved)="resolved_showing_allAvailable(showing_all_available_books[i].childValue)"
+                      siteKey="6Lf3qoYUAAAAADecSb-ooY9vo18Nt8M9o8gTUvvj"></re-captcha>
+                  </div>
+                </div>
+                <button id="{{showing_all_available_books[i].childValue}}_Button2"
+                  (click)="mannualContact2(showing_all_available_books[i].childValue, showing_all_available_books[i].uid);"
+                  class="px-3 py-3  btn btn-lg btn-outline-dark mt-3 ">Buy
+                  TextBook</button>
+                <div id="{{showing_all_available_books[i].childValue}}" class="mt-4"></div>
+              </div> -->
+              <!-- recaptcha ends -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end of showing all available books -->
+  <!-- showing results -->
+  <div id="resultDiv" class="card card-body mt-4 container" *ngIf="searchChangeData?.length>0">
+    <p class="display-4 text-center" style="font-size:1.7em">Results for <u>"{{searchQuery}}"</u> </p>
+    <div *ngFor="let item of searchChangeData ; let i = index" class=" mt-3">
+      <div class="card">
+        <div id="search_text" class="card-header">
+          <div class="row">
+            <div class="col">
+              <p class="ml-2">
+                <strong> Avialable</strong> #{{searchChangeData[i].numberOfCopies}} - Result - {{i+1}}
+              </p>
+            </div>
+            <!-- <div class="col">
+              <p class="mr-2 text-right">
+              </p>
+            </div> -->
+          </div>
+        </div>
+        <div class="card-body row">
+          <div class="col-md-8 col-sm-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-7 col-sm-5 col-xs-4  my-4 ">
+                    <p style="font-size: 1.4em">
+                      <strong>Title: </strong> {{searchChangeData[i].title}}
+                    </p>
+                    <strong>Department: </strong>{{searchChangeData[i].department}}
+                    <br>
+                    <strong>Course: </strong>{{searchChangeData[i].course}}
+                    <br>
+                    <strong> Isbn: </strong>
+                    {{searchChangeData[i].isbn}}
+                    <br>
+                    <strong>Authors: </strong>{{searchChangeData[i].authors}}
+                    <br>
+                    <strong>Condition: </strong>{{searchChangeData[i].condition}}
+                    <br>
+                    <strong>Description: </strong>{{searchChangeData[i].description}}
+                  </div>
+                  <div class="my-4 mx-auto">
+                    <img src={{searchChangeData[i].image}}>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- recaptcha-->
+          <div class="col-md-4 col-sm-8  mt-5">
+            <strong style="font-size:1.3em"> Price: {{searchChangeData[i].price}} <i class="fa fa-dollar"></i> </strong>
+            <div class="mx-auto">
+              <div>Posted on: {{searchChangeData[i].postedDate}} </div>
+              <div style="display:none " id="{{searchChangeData[i].childValue}}_captcha">
+                <re-captcha data-size="compact" (resolved)="resolved(searchChangeData[i].childValue)"
+                  siteKey="6Lf3qoYUAAAAADecSb-ooY9vo18Nt8M9o8gTUvvj"></re-captcha>
+              </div>
+            </div>
+            <button id="{{searchChangeData[i].childValue}}_Button"
+              (click)="mannualContact(searchChangeData[i].childValue, searchChangeData[i].uid);"
+              class="px-3 py-3  btn btn-lg btn-outline-dark mt-3 ">Buy
+              TextBook</button>
+            <div id="{{searchChangeData[i].childValue}}" class="mt-4"></div>
+          </div>
+          <!-- recaptcha ends -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end showing results -->
+  <!-- showing no result. -->
+  <div id="resultDiv_2" class="card card-body mt-4 container" *ngIf="searchChangeData?.length === 0">
+    <p class="display-4 text-center" style="font-size:2.2em">Results: <span class="text-muted"
+        style="font-size:0.8em">This book is not
+        available </span></p>
+    <div class="card my-4 mt-4">
+      <div id="search_text" class="card-header instituition_color "> Can't Find your Text-Book ? </div>
+      <div class="card-body">
+        <div class="card-body row">
+          <div class="col-md-8" id="search_text">
+            Create an alert of your
+            <strong>Text-Book</strong>
+            and get a
+            <br> notification by an E-mail.
+          </div>
+          <div class="col-4">
+            <button data-toggle="modal" data-target="#login_modal" class="btn btn-lg btn-outline-dark ml-auto"
+              (click)="createAlert();">Notify
+              ME</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end error no result. -->
+  <div class="modal fade" style="margin-top:-20px; overflow-y: scroll" id="login_modal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLongTitle" aria-hidden="true" data-toggle="modal">
+    <button type="button" class="btn btn-secondary " style="display:none" id="close_2"
+      data-dismiss="modal">Close</button>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="container" style="width:100% ; margin-top: -10px">
+            <!-- if not logged in let user log in. -->
+            <div *ngIf="!loggedIn" class="row">
+              <div class="col-12 mx-auto">
+                <div class="">
+                  <div class="">
+                    <button type="button" class="close" id="close_modal" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div style="font-size: 2em" class="text-center display-4 ">Sign In
+                      <span class="text-muted" style="font-size:25px;">to
+                        Proceed</span>
+                    </div>
+                    <hr>
+                    <div class="alert alert-danger" *ngIf=" errorMessage?.length>1  "> {{errorMessage}} </div>
+                    <form class="form-signin" formname="form" (ngSubmit)="f.form.valid " #f="ngForm" novalidate>
+                      <div class="form-label-group">
+                        <mat-form-field class="width_ mt-2">
+                          <input matInput placeholder="Email" type="text" class="form-control" style="display: block;"
+                            [(ngModel)]="mail" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}"
+                            name="email" required email />
+                        </mat-form-field>
+                        <mat-form-field class="width_" style="display:block">
+                          <input matInput placeholder="Password" type="password" class="form-control"
+                            style="border:2 px solid red" [(ngModel)]="pass" #password="ngModel"
+                            [ngClass]="{'is-invalid':f.submitted && password.invalid}" name="password" minlength="6"
+                            required password />
+                        </mat-form-field>
+                      </div>
+                      <div class="text-center">
+                        <button class="btn btn-lg  btn-outline-success col-5"
+                          (click)="loginUsernamePassword(email.value, password.value);"
+                          style="width:100%; ">Login</button>
+                        <button class="btn btn-lg btn-outline-secondary col-5 ml-2" style="width:100% "
+                          (click)="createUsernamePassword(email.value,password.value);" type="submit">Sign Up</button>
+                      </div>
+                    </form>
+                    <hr class="my-4">
+                    <button class="btn btn-lg btn-google btn-block" type="submit" (click)="signInWithGoogle();">
+                      <i class="fa fa-google fa-fw mr-2"></i> Google SignIn
+                    </button>
+                    <button class="btn btn-lg btn-facebook btn-block " (click)="signInWithFacebook();" type="submit">
+                      <i class="fa fa-facebook fa-fw mr-2"></i> Facebook SignIn
+                    </button>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end login method -->
+            <!-- if logged in then show below -->
+            <div *ngIf="loggedIn">
+              <div>
+                <div class="card my-3">
+                  <div class="card-header">create an Alert Notification </div>
+                  <!-- search bar  -->
+                  <div class="card-body">
+                    <p class="display-4 mt-3  " style="font-size:1.6em"><i class="fa fa-arrow-right"></i> Step 1:
+                      Search.
+                    </p>
+                    <mat-progress-bar mode="query" *ngIf="searchBar">
+                    </mat-progress-bar>
+                    <mat-form-field class="width_ mt-2 mb-3" appearance="outline">
+                      <input matInput placeholder="Enter book name or ISBN" #sear (blur)="hideKeyboard()"
+                        (keyup.enter)="mannualBookNameSearch(sear.value)" autocomplete="off">
+                      <button class="btn btn-outline-dark" style="margin-top:-19px" matSuffix aria-label="search"
+                        (click)="mannualBookNameSearch(sear.value)">
+                        <mat-icon>search</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!-- end search bar -->
+                <div class="alert alert-danger mt-2" *ngIf="searchBookError">{{searchBookError}}</div>
+                <!-- results -->
+                <div *ngIf="showScrollbar" id="resultDiv__" class="mt-3">
+                  <p class="display-4 mt-3  " *ngIf="!searchBookError" style="font-size:1.6em"><i
+                      class="fa fa-arrow-right"></i> Step 2:
+                    select book.
+                  </p>
+                  <div id="style-1" *ngIf="!searchBookError" class="scrollBar_search_login text-center">
+                    <div *ngFor="let item of searchData ; let i = index" class="card card-body  mt-3">
+                      <div class="card-header" style="background-color:gray"> Showing {{i+1}} of
+                        {{searchData.length}}
+                      </div>
+                      <div id="{{searchData[i].image}}">
+                        <strong>Title: </strong> {{searchData[i].title}}<br>
+                        <strong>Authors: </strong> {{searchData[i].author}}<br>
+                        <strong>Isbn</strong>
+                        <div *ngFor="let item_isbn of searchData[i].isbn">
+                          {{item_isbn.identifier}}
+                        </div>
+                        <br>
+                        <div>
+                          <img src={{searchData[i].image}}>
+                        </div>
+                        <button class="btn btn-lg btn-outline-dark my-3" type="button"
+                          (click)="mannualBookSelected(searchData[i])" data-toggle="modal"
+                          data-target="#notificationModal">
+                          Select
+                          this.
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end results. -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal for the notification. -->
+  <div class="modal fade container" id="notificationModal" tabindex="-1" role="dialog"
+    aria-labelledby="notificationModal0" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="notificationModal0">Notification
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body row">
+          <div class="col-md-7 ">
+            <div class="card card-body">
+              <strong>Title: </strong>
+              {{selectedBook?.title}}
+              <strong>Isbn: </strong>
+              <div *ngFor="let item_isbn_ of selectedBook?.isbn">
+                {{item_isbn_?.identifier}}
+              </div>
+              <strong>Authors: </strong>
+              {{selectedBook?.author}}
+              <br>
+            </div>
+          </div>
+          <div class="col-md-5 ">
+            <div class=" mt-1 card card-body ">
+              <img src={{selectedBook?.image}} style="width:128px; height: 181px;">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="createNotification()">Create Notification</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end modal  -->
+</div>

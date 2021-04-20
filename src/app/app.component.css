@@ -1,0 +1,41 @@
+/* .navbar-brand {
+	padding: 0px;
+}
+.navbar-brand>img {
+	height: 100%;
+	padding: 15px;
+	width: auto;
+}
+.topnav .navbar-brand {
+	height: 140px;
+}
+.topnav .nav >li >a {
+	padding-top: 50px;
+	padding-bottom: 30px;
+	font-size: 1.4em;
+}
+.topnav .navbar-toggle {
+	padding: 10px;
+	margin: 25px 15px 25px 0;
+}
+/* CSS Transform Align Navbar Brand Text ... This could also be achieved with table / table-cells */
+
+/*.navbar-alignit .navbar-header {
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	height: 50px;
+}
+.navbar-alignit .navbar-brand {
+	top: 50%;
+	display: block;
+	position: relative;
+	height: auto;
+	transform: translate(0, -50%);
+	margin-right: 15px;
+	margin-left: 15px;
+}
+.navbar-nav>li>.dropdown-menu {
+	z-index: 9999;
+} 
+*/

@@ -1,0 +1,70 @@
+<div *ngIf="!login_null">
+  <div style="height:70% " class="mt-2">
+    <div class="row  text-center">
+      <div class=" mx-auto" style=" max-width: 350px; width: 100%">
+        <div class="card card-signin">
+
+
+          <div class="card-body">
+            <div class="alert alert-danger" *ngIf="errorMessage?.length>1  "> {{errorMessage}} </div>
+            <p class="display-4" style="font-size:1.5em">Sign in to continue.</p>
+            <form class="form-signin" formname="form" (ngSubmit)="f.form.valid " #f="ngForm" novalidate>
+              <div class="form-label-group">
+
+
+                <mat-form-field class="width_">
+                  <input matInput placeholder="Email" type="text" class="form-control" style="display: block;"
+                    [(ngModel)]="mail" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}"
+                    name="email" required email />
+                  <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                    <div *ngIf="email.errors.required">Email is required</div>
+                    <div *ngIf="email.errors.email">Email must be a valid email Address</div>
+                  </div>
+                </mat-form-field>
+
+                <mat-form-field class="width_" style="display:block">
+                  <input matInput placeholder="Password" type="password" class="form-control"
+                    style="border:2 px solid red" [(ngModel)]="pass" #password="ngModel"
+                    [ngClass]="{'is-invalid':f.submitted && password.invalid}" name="password" minlength="6" required
+                    password />
+                  <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                    <div *ngIf="password.errors.required">Password is required.</div>
+                    <div *ngIf="password.errors.minlength">Password must be of 6 characters.</div>
+                  </div>
+                </mat-form-field>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-lg  btn-outline-success col-5"
+                  (click)="signInwithEmailandpassword(email.value, password.value);" style="width:100%; ">Login</button>
+                <button class="btn btn-lg btn-outline-secondary col-5 ml-2" style="width:100% "
+                  (click)="createUsernamePassword(email.value, password.value)" type="submit">Register </button>
+                <!-- (click)="createUsernamePassword(email.value,password.value);" type="submit">Register -->
+              </div>
+            </form>
+
+
+            <mat-progress-bar mode="indeterminate" *ngIf="loginProgressBar">
+            </mat-progress-bar>
+
+            <hr class="">
+
+
+            <button class="btn btn-lg btn-google btn-block col-12" type="submit" (click)="signInWithGoogle();"><i
+                class="fa fa-google fa-fw mr-2"></i> Google SignIn</button>
+            <button class="btn btn-lg btn-facebook btn-block col-12" (click)="signInWithFacebook();" type="submit"><i
+                class="fa fa-facebook fa-fw mr-2"></i> Facebook SignIn</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- logged in  -->
+<!-- 
+<div *ngIf="login_null">
+
+
+
+
+</div> -->
