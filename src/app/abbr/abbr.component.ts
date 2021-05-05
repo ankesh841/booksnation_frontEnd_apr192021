@@ -96,6 +96,9 @@ export class AbbrComponent implements OnInit {
     this.showProgressBar = true;
     this.backend.algoliaSearchBackend( event, whichIndex ).subscribe( temp => {
       this.searchChangeData = temp
+
+      console.log( temp )
+
     } )
     setTimeout( () => {
       if ( this.searchChangeData ) {
@@ -122,25 +125,40 @@ export class AbbrComponent implements OnInit {
 
   }
 
+  progressBarAfterClickBuySearch: boolean;
+  progressBarAfterClickBuyshowavailable: boolean;
+
+
   //to show captcha after button click.
   mannualContact( childValue ) {
     console.log( childValue )
 
     $( "#" + childValue + "_Button" ).hide();
+    this.progressBarAfterClickBuySearch = true;
+
     $( "#" + childValue + "_captcha" ).show();
 
   }
 
-  // mannualContact2( childValue ) {
-  //   console.log( childValue )
+  mannualContact2( childValue ) {
+    console.log( childValue )
 
-  //   $( "#" + childValue + "_Button" ).hide();
-  //   $( "#" + childValue + "_captcha" ).show();
 
-  // }
+    $( "#" + childValue + "_Button2" ).hide();
+    $( "#" + childValue + "_captcha2" ).show();
+
+    // $( "#" + childValue + "_progress_available" ).show();
+    // this.progressBarAfterClickBuyshowavailable = true;
+
+
+
+
+  }
 
 
   algoliaAllAvailable() {
+
+    console.log( 'algolia search available' )
 
     this.backend.algoliaSearch_showing_all_available_book().subscribe( temp => {
       this.showing_all_available_books = temp;
@@ -160,13 +178,15 @@ export class AbbrComponent implements OnInit {
     var phone;
     for ( var i = 0; i < this.searchChangeData.length; i++ ) {
       if ( this.searchChangeData[i].childValue === childValue ) {
+        console.log( this.searchChangeData[i].seller_emaiL )
+
         if ( this.searchChangeData[i].phoneNumber === undefined ) {
           phone = "NA"
         } else {
           phone = this.searchChangeData[i].phoneNumber;
         }
-        document.getElementById( childValue ).innerHTML = '<object type="text/html" data="email.html" ></object>';
-        document.getElementById( childValue ).innerHTML =
+        document.getElementById( childValue + '_sec' ).innerHTML = '<object type="text/html" data="email.html" ></object>';
+        document.getElementById( childValue + '_sec' ).innerHTML =
           "<strong>Seller's Email: </strong> "
           + `<a href="mailto:` + this.searchChangeData[i].seller_emaiL + `?Subject=Interested%20in%20Buying%20your%20TextBook" 
           `+ this.searchChangeData[i].tilte + `target="_top">` + this.searchChangeData[i].seller_emaiL + `</a>`
@@ -181,40 +201,51 @@ export class AbbrComponent implements OnInit {
 
     $( "#" + childValue + "_Button" ).hide(); //hiding the mannual button... 
     $( "#" + childValue + "_captcha" ).hide(); //hiding the mannual button... 
+    setTimeout( () => {
+
+      this.progressBarAfterClickBuySearch = false;
+    }, 1000 );
   }
 
 
 
 
 
-  // resolved_showing_allAvailable( childValue ) {
-  //   var phone;
-  //   console.log( childValue )
+  resolved_showing_allAvailable( childValue ) {
+    var phone;
+    console.log( childValue )
 
-  //   for ( var i = 0; i < this.showing_all_available_books.length; i++ ) {
-  //     if ( this.showing_all_available_books[i].childValue === childValue ) {
-  //       if ( this.showing_all_available_books[i].phoneNumber === undefined ) {
-  //         phone = "NA"
-  //       } else {
-  //         phone = this.showing_all_available_books[i].phoneNumber;
-  //       }
-  //       document.getElementById( childValue ).innerHTML = '<object type="text/html" data="email.html" ></object>';
-  //       document.getElementById( childValue ).innerHTML =
-  //         "<strong>Seller's Email: </strong> "
-  //         + `<a href="mailto:` + this.showing_all_available_books[i].seller_emaiL + `?Subject=Interested%20in%20Buying%20your%20TextBook" 
-  //         `+ this.showing_all_available_books[i].tilte + `target="_top">` + this.showing_all_available_books[i].seller_emaiL + `</a>`
-  //         + "<br>"
-  //         + "<strong>Phone Number: </strong> "
-  //         + `<a href="tel:` + this.showing_all_available_books[i].phoneNumber + `">` + this.showing_all_available_books[i].phoneNumber
-  //         + `</a>`
-  //         + "<br>"
-  //         + "<strong> Seller's Name: </strong> " + this.showing_all_available_books[i].seller_username
-  //     }
-  //   }
+    for ( var i = 0; i < this.showing_all_available_books.length; i++ ) {
+      if ( this.showing_all_available_books[i].childValue === childValue ) {
+        if ( this.showing_all_available_books[i].phoneNumber === undefined ) {
+          phone = "NA"
+        } else {
+          phone = this.showing_all_available_books[i].phoneNumber;
+        }
+        document.getElementById( childValue ).innerHTML = '<object type="text/html" data="email.html" ></object>';
+        document.getElementById( childValue ).innerHTML =
+          "<strong>Seller's Email: </strong> "
+          + `<a href="mailto:` + this.showing_all_available_books[i].seller_emaiL + `?Subject=Interested%20in%20Buying%20your%20TextBook" 
+          `+ this.showing_all_available_books[i].tilte + `target="_top">` + this.showing_all_available_books[i].seller_emaiL + `</a>`
+          + "<br>"
+          + "<strong>Phone Number: </strong> "
+          + `<a href="tel:` + this.showing_all_available_books[i].phoneNumber + `">` + this.showing_all_available_books[i].phoneNumber
+          + `</a>`
+          + "<br>"
+          + "<strong> Seller's Name: </strong> " + this.showing_all_available_books[i].seller_username
+      }
+    }
 
-  //   $( "#" + childValue + "_Button2" ).hide(); //hiding the mannual button... 
-  //   $( "#" + childValue + "_captcha2" ).hide(); //hiding the mannual button... 
-  // }
+    $( "#" + childValue + "_Button2" ).hide(); //hiding the mannual button... 
+    $( "#" + childValue + "_captcha2" ).hide(); //hiding the mannual button... 
+
+    setTimeout( () => {
+
+      $( "#" + childValue + "_progress_available" ).show();
+
+      // this.progressBarAfterClickBuyshowavailable = false;
+    }, 1000 );
+  }
 
 
 

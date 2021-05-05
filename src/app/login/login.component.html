@@ -1,17 +1,16 @@
-<div *ngIf="!login_null">
-  <div style="height:70% " class="mt-2">
-    <div class="row  text-center">
-      <div class=" mx-auto" style=" max-width: 350px; width: 100%">
+<div *ngIf="!login_null" class="my-4">
+  <div style="height:70%; " class="mt-4">
+    <div class="row  text-center ">
+      <div class=" mx-auto" style=" max-width: 350px; width: 100% ;  box-shadow:5px 10px 18px gray">
         <div class="card card-signin">
-
-
           <div class="card-body">
             <div class="alert alert-danger" *ngIf="errorMessage?.length>1  "> {{errorMessage}} </div>
-            <p class="display-4" style="font-size:1.5em">Sign in to continue.</p>
+            <p class="display-4" style="font-size:1.9em; "><span style="font-weight: 700;"> Sign in</span> <span
+                style="font-size: 0.8em;"> to Continue.</span>
+            </p>
+            <hr>
             <form class="form-signin" formname="form" (ngSubmit)="f.form.valid " #f="ngForm" novalidate>
               <div class="form-label-group">
-
-
                 <mat-form-field class="width_">
                   <input matInput placeholder="Email" type="text" class="form-control" style="display: block;"
                     [(ngModel)]="mail" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}"
@@ -21,7 +20,6 @@
                     <div *ngIf="email.errors.email">Email must be a valid email Address</div>
                   </div>
                 </mat-form-field>
-
                 <mat-form-field class="width_" style="display:block">
                   <input matInput placeholder="Password" type="password" class="form-control"
                     style="border:2 px solid red" [(ngModel)]="pass" #password="ngModel"
@@ -41,25 +39,19 @@
                 <!-- (click)="createUsernamePassword(email.value,password.value);" type="submit">Register -->
               </div>
             </form>
-
-
             <mat-progress-bar mode="indeterminate" *ngIf="loginProgressBar">
             </mat-progress-bar>
-
             <hr class="">
-
-
             <button class="btn btn-lg btn-google btn-block col-12" type="submit" (click)="signInWithGoogle();"><i
                 class="fa fa-google fa-fw mr-2"></i> Google SignIn</button>
-            <button class="btn btn-lg btn-facebook btn-block col-12" (click)="signInWithFacebook();" type="submit"><i
-                class="fa fa-facebook fa-fw mr-2"></i> Facebook SignIn</button>
+            <!-- <button class="btn btn-lg btn-facebook btn-block col-12" (click)="signInWithFacebook();" type="submit"><i
+                class="fa fa-facebook fa-fw mr-2"></i> Facebook SignIn</button> -->
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <!-- logged in  -->
 <!-- 
 <div *ngIf="login_null">

@@ -14,23 +14,23 @@ import { AuthorizationService } from "../authorization.service"; //service that 
 import { BackendService } from "../backend.service";
 import swal from "sweetalert2";
 
-@Component({
+@Component( {
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"]
-})
+} )
 
 export class LoginComponent implements OnInit {
 
   loginProgressBar: boolean; //showing login progerss bar
-  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase, private backend: BackendService, private cdRef: ChangeDetectorRef, public router: Router, private authService: AuthorizationService) {
-    this.afAuth.authState.subscribe((res) => {
-      if (res) {
+  constructor( public afAuth: AngularFireAuth, public db: AngularFireDatabase, private backend: BackendService, private cdRef: ChangeDetectorRef, public router: Router, private authService: AuthorizationService ) {
+    this.afAuth.authState.subscribe( ( res ) => {
+      if ( res ) {
         this.username = res.displayName;
         this.email_logged = res.email;
         this.login_null = true;
         this.globalUser = res;
-        if (!this.username) {
+        if ( !this.username ) {
           swal(
             {
               title: 'enter your  name',
@@ -39,13 +39,13 @@ export class LoginComponent implements OnInit {
               allowOutsideClick: false,
               keydownListenerCapture: false,
               inputPlaceholder: 'Enter your name',
-              inputValidator: (value) => {
-                if (value.length > 3 && value) {
+              inputValidator: ( value ) => {
+                if ( value.length > 3 && value ) {
                   res.updateProfile(
                     {
                       displayName: value,
                       photoURL: "#"
-                    }).then(function () { }, function (error) { });
+                    } ).then( function () { }, function ( error ) { } );
                   return;
                 }
                 else {
@@ -53,13 +53,13 @@ export class LoginComponent implements OnInit {
                 }
                 // return !value && 'You need to write something!'
               }
-            }).then(function (result) { }).catch(swal.noop)
+            } ).then( function ( result ) { } ).catch( swal.noop )
         }
       }
       else {
         this.login_null = false;
       }
-    });
+    } );
   }
   phoneNumber;
   displayNameUser;
@@ -94,18 +94,18 @@ export class LoginComponent implements OnInit {
   loggedIn = new EventEmitter<boolean>();
 
   login() {
-    this.loggedIn.emit(true);
+    this.loggedIn.emit( true );
   }
 
   ngOnInit() {
 
-    this.afAuth.authState.subscribe(rs => {
-      if (rs) {
-        this.router.navigate(['/postBook/postBySearch']);
+    this.afAuth.authState.subscribe( rs => {
+      if ( rs ) {
+        this.router.navigate( ['/postBook/postBySearch'] );
       }
 
 
-    });
+    } );
   }
   bookSearch = [];
   searchBookError = "";
@@ -116,13 +116,13 @@ export class LoginComponent implements OnInit {
 
 
 
-  signInwithEmailandpassword(email, password) {
+  signInwithEmailandpassword( email, password ) {
     var temp = "";
     this.loginProgressBar = true;
     var user_temp;
     this.submittingUserInfo = {};
-    this.authService.loginUsernamePassword(email, password).then(a => {
-      if (a.user) {
+    this.authService.loginUsernamePassword( email, password ).then( a => {
+      if ( a.user ) {
         this.loginProgressBar = false
         this.globalUser = a.user;
         user_temp = a.user;
@@ -132,7 +132,7 @@ export class LoginComponent implements OnInit {
 
         this.cdRef.detectChanges();
 
-        this.router.navigate(['/postBook/postBySearch']);
+        this.router.navigate( ['/postBook/postBySearch'] );
 
 
         this.submittingUserInfo = {
@@ -144,23 +144,23 @@ export class LoginComponent implements OnInit {
 
 
 
-        this.backend.submitUserInfo(this.submittingUserInfo).subscribe(s => { })
+        this.backend.submitUserInfo( this.submittingUserInfo ).subscribe( s => { } )
       }
-    }).catch(function (error) {
+    } ).catch( function ( error ) {
       temp = error.message;
-    }).then(a => {
+    } ).then( a => {
       this.errorMessage = temp;
-    })
+    } )
   }
 
 
-  createUsernamePassword(email, password) {
+  createUsernamePassword( email, password ) {
     var temp = "";
     var user_temp;
     this.loginProgressBar = true;
     this.submittingUserInfo = {};
-    this.authService.createUsernamePassword(email, password).then(a => {
-      if (a.user) {
+    this.authService.createUsernamePassword( email, password ).then( a => {
+      if ( a.user ) {
         this.globalUser = a.user;
         this.loginProgressBar = false;
         user_temp = a.user;
@@ -175,13 +175,13 @@ export class LoginComponent implements OnInit {
           userid: user_temp.uid,
           username: user_temp.displayName
         }
-        this.backend.submitUserInfo(this.submittingUserInfo).subscribe(s => { })
+        this.backend.submitUserInfo( this.submittingUserInfo ).subscribe( s => { } )
       }
-    }).catch(function (error) {
+    } ).catch( function ( error ) {
       temp = error.message;
-    }).then(a => {
+    } ).then( a => {
       this.errorMessage = temp;
-    })
+    } )
   }
   signInWithFacebook() {
 
@@ -189,8 +189,8 @@ export class LoginComponent implements OnInit {
     var temp = "";
     var user_temp;
     this.submittingUserInfo = {};
-    this.authService.signInWithFacebook().then(a => {
-      if (a.user) {
+    this.authService.signInWithFacebook().then( a => {
+      if ( a.user ) {
         this.globalUser = a.user;
         user_temp = a.user;
         this.login_null = true;
@@ -204,26 +204,30 @@ export class LoginComponent implements OnInit {
           userid: user_temp.uid,
           username: user_temp.displayName
         }
-        this.backend.submitUserInfo(this.submittingUserInfo).subscribe(s => { })
+        this.backend.submitUserInfo( this.submittingUserInfo ).subscribe( s => { } )
       }
 
-    }).catch(function (error) {
-      console.log(error)
+    } ).catch( function ( error ) {
+      console.log( error )
       temp = error.message;
 
-    }).then(a => {
-      console.log(temp)
+    } ).then( a => {
+      console.log( temp )
       this.errorMessage = temp;
       this.cdRef.detectChanges();
-    })
+    } )
   }
+
+
+
   signInWithGoogle() {
     this.loginProgressBar = true;
     var temp = "";
     var user_temp;
     this.submittingUserInfo = {};
-    this.authService.signInWithGoogle().then(a => {
-      if (a.user) {
+    this.authService.signInWithGoogle().then( a => {
+
+      if ( a.user ) {
         this.globalUser = a.user;
 
         user_temp = a.user;
@@ -237,27 +241,27 @@ export class LoginComponent implements OnInit {
           userid: user_temp.uid,
           username: user_temp.displayName
         }
-        this.backend.submitUserInfo(this.submittingUserInfo).subscribe(s => { })
+        this.backend.submitUserInfo( this.submittingUserInfo ).subscribe( s => { } )
       }
-    }).catch(function (error) {
+    } ).catch( function ( error ) {
       temp = error.message;
-    }).then(a => {
+    } ).then( a => {
       this.errorMessage = temp;
-    })
+    } )
   }
 
 
   logout() {
-    this.authService.logOut().then(a => {
+    this.authService.logOut().then( a => {
       this.login_null = false;
       this.cdRef.detectChanges();
-    });
+    } );
   }
-  displayError(errorCode) {
-    if (errorCode === "auth/user-not-found") {
+  displayError( errorCode ) {
+    if ( errorCode === "auth/user-not-found" ) {
       this.errorMessage = "User doesn't exists, Check Email or Sign Up to proceed.";
     }
-    else if (errorCode === "auth/wrong-password") {
+    else if ( errorCode === "auth/wrong-password" ) {
       this.errorMessage = "Invalid password";
     }
     else {

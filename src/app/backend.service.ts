@@ -27,8 +27,8 @@ export class BackendService {
 
   sendDataBool = false;
 
-  // private rootUrl = "http://localhost:3000";
-  private rootUrl = ".."; //if uploading..
+  private rootUrl = "http://localhost:3000";
+  // private rootUrl = ".."; //if uploading..
   // 
   //  private rootUrl = "https://booksnation-working.herokuapp.com";
 
@@ -62,6 +62,9 @@ export class BackendService {
   algoliaSearch_showing_all_available_book() {
     var obj = {};
     return this.http.post( this.rootUrl + '/showingAllAvailable', obj, this.httpOptions );
+
+
+
   }
 
 
