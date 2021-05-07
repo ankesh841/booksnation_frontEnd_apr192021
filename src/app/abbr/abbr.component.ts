@@ -36,6 +36,7 @@ export class AbbrComponent implements OnInit {
     this.backend.algoliaSearch_showing_all_available_book().subscribe( temp => {
       this.showing_all_available_books = temp;
       console.log( 'calling first' )
+      console.log( temp )
     }
 
       ,

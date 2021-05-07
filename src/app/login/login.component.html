@@ -5,10 +5,11 @@
         <div class="card card-signin">
           <div class="card-body">
             <div class="alert alert-danger" *ngIf="errorMessage?.length>1  "> {{errorMessage}} </div>
-            <p class="display-4" style="font-size:1.9em; "><span style="font-weight: 700;"> Sign in</span> <span
-                style="font-size: 0.8em;"> to Continue.</span>
+            <p class="display-4" style="font-size:1.9em; "><span
+                style="font-weight: 700;  padding: 10px 17px; color: white;" class="bg-warning"> Sign in</span>
+              <span style="font-size: 0.8em;"> to Continue.</span>
             </p>
-            <hr>
+            <hr style="margin-top: 2.1em;">
             <form class="form-signin" formname="form" (ngSubmit)="f.form.valid " #f="ngForm" novalidate>
               <div class="form-label-group">
                 <mat-form-field class="width_">
@@ -42,8 +43,8 @@
             <mat-progress-bar mode="indeterminate" *ngIf="loginProgressBar">
             </mat-progress-bar>
             <hr class="">
-            <button class="btn btn-lg btn-google btn-block col-12" type="submit" (click)="signInWithGoogle();"><i
-                class="fa fa-google fa-fw mr-2"></i> Google SignIn</button>
+            <!-- <button class="btn btn-lg btn-google btn-block col-12" type="submit" (click)="signInWithGoogle();"><i
+                class="fa fa-google fa-fw mr-2"></i> Google SignIn</button> -->
             <!-- <button class="btn btn-lg btn-facebook btn-block col-12" (click)="signInWithFacebook();" type="submit"><i
                 class="fa fa-facebook fa-fw mr-2"></i> Facebook SignIn</button> -->
           </div>

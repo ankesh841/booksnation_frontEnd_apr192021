@@ -1,25 +1,17 @@
 <div class="container mt-4">
-
   <div class="card">
-    <div class="card-header text-center"><span class="display-4" style="font-size:2.7em">Posted Books</span></div>
+    <div class="card-header text-center"><span class="display-4" style="font-size:2.7em; font-weight: 700;">Posted
+        Books</span></div>
     <div class="card-body">
       <div class="my-3">
-
         <div class="my-3">
-
           <mat-progress-bar mode="query" *ngIf="!postedBooksByUser && !searchBar">
           </mat-progress-bar>
-
         </div>
-
-
         <div class=" display-4 text-center mb-2" *ngIf="!postedBooksByUser" style="font-size:1.7em">
           You haven't posted any books yet.
         </div>
-
         <div class="row">
-
-
           <div class="col-md-9 col-sm-12 col-xs-12 text-center" *ngIf="postedBooksByUser?.length>0">
             <mat-form-field class="width_" appearance="outline">
               <mat-label>Sort results.</mat-label>
@@ -31,35 +23,23 @@
               </button>
             </mat-form-field>
           </div>
-
           <div class="col-md-3 col-sm-6 col-xs-6 my-2 text-center" *ngIf="postedBooksByUser?.length>0">
-
             <button class="btn btn-outline-dark btn-lg " (click)="showPostedBooks()">Show All Posted Books</button>
-
           </div>
-
         </div>
-
-
         <div class="alert alert-danger" *ngIf="noResultError">No result's matching your search.</div>
-
         <div class="mt-2" *ngIf="postedBooksByUser?.length>0">
-
           <div id="resultsDiv" class="card card-body">
-
             <div class="display-4 text-center mb-3" style="font-size:2.1em">All Posted Books</div>
-
             <div *ngFor="let item of postedBooksByUser; let i = index" class="mt-2">
               <div class="card" id="{{postedBooksByUser[i].childValue}}">
                 <div class="card-body">
                   <div class="row">
-
                     <div class="col-md-4">
                       <p style="font-size: 1.4em"><strong>Title: </strong> {{postedBooksByUser[i].title}}
                       </p>
                       <strong> Price: </strong>
                       {{postedBooksByUser[i].price}} <i class="fa fa-dollar"></i><br>
-
                       <strong> Isbn: </strong>
                       {{postedBooksByUser[i].isbn}}
                       <br>
@@ -72,49 +52,27 @@
                       <strong>Description: </strong>{{postedBooksByUser[i].description}}
                       <br>
                     </div>
-
-
                     <div class="col-md-3 ">
                       <img src="{{postedBooksByUser[i].image}}" class="mt-2">
                     </div>
-
                     <mat-divider [vertical]="true">
                     </mat-divider>
-
-
-
-
                     <div class="col-md-3 mt-4 ">
                       <p class="display-4" style="font-size:1em">Posted on {{postedBooksByUser[i].postedDate}}</p>
-
                       <button (click)="deleteThis(postedBooksByUser[i].childValue)" class="btn btn-outline-dark">Delete
                         this post</button>
-
                     </div>
-
                     <div class="col-md-1 text-center  mt-5 display-4" style=" font-size: 2.6em">
                       {{i+1}}
                     </div>
-
-
-
                   </div>
                 </div>
                 <hr>
               </div>
-
-
             </div>
-
-
-
           </div>
         </div>
       </div>
-
-
     </div>
-
-
   </div>
 </div>

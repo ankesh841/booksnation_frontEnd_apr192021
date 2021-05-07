@@ -101,7 +101,9 @@ export class LoginComponent implements OnInit {
 
     this.afAuth.authState.subscribe( rs => {
       if ( rs ) {
-        this.router.navigate( ['/postBook/postBySearch'] );
+        // this.router.navigate( ['/postBook/postBySearch'] );
+        this.router.navigate( ['/postwithdetails'] );
+
       }
 
 
@@ -132,7 +134,8 @@ export class LoginComponent implements OnInit {
 
         this.cdRef.detectChanges();
 
-        this.router.navigate( ['/postBook/postBySearch'] );
+        // this.router.navigate( ['/postBook/postBySearch'] );
+        this.router.navigate( ['/postwithdetails'] );
 
 
         this.submittingUserInfo = {

@@ -9,11 +9,11 @@ import { PostBookService } from '../post-book.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { Route } from '@angular/compiler/src/core';
-@Component({
+@Component( {
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
   styleUrls: ['./post-page.component.css']
-})
+} )
 export class PostPageComponent implements OnInit {
   hidePage: boolean;
 
@@ -26,19 +26,19 @@ export class PostPageComponent implements OnInit {
   price;  //selected book price
 
   selectedBook; //array to store selected book
-  constructor(private route: ActivatedRoute, private afAuth: AngularFireAuth, private backend: BackendService, private googleSearch: GooglebookSearchService, private router: Router, private postBookService: PostBookService) {
+  constructor( private route: ActivatedRoute, private afAuth: AngularFireAuth, private backend: BackendService, private googleSearch: GooglebookSearchService, private router: Router, private postBookService: PostBookService ) {
 
-    this.afAuth.authState.subscribe((res) => {
-      if (res) {
+    this.afAuth.authState.subscribe( ( res ) => {
+      if ( res ) {
         this.hidePage = true;
       }
       else {
 
-        this.router.navigate(["/"]).then(result => { window.location.href = 'login'; });
+        this.router.navigate( ["/"] ).then( result => { window.location.href = 'login'; } );
 
 
       }
-    })
+    } )
   }
 
   ngOnInit() {
@@ -71,25 +71,25 @@ export class PostPageComponent implements OnInit {
   // }
   // 
 
-  mannualBookNameSearch(search: string) {
-    search = this.backend.inputFilter(search);
+  mannualBookNameSearch( search: string ) {
+    search = this.backend.inputFilter( search );
 
-    if (search.length > 3) {
+    if ( search.length > 3 ) {
       this.backend.hidingKeyboard();
       try {
 
-        var result = this.googleSearch.mannualBookNameSearch(search); //getting search result from the service
-        console.log(result)
+        var result = this.googleSearch.mannualBookNameSearch( search ); //getting search result from the service
+        console.log( result )
         this.searchBookError = "";
         this.searchBar = true;  //showing the progress bar
         this.bookSearch = result; //assigning it to the var.
         this.showScrollbar = true;  //showing div
 
-        setTimeout(() => {
-          if (result.length === 9) {
+        setTimeout( () => {
+          if ( result.length === 9 ) {
             this.searchBar = false;
 
-            var elmnt = document.getElementById("resultDiv");
+            var elmnt = document.getElementById( "resultDiv" );
             elmnt.scrollIntoView(); //showing the result div focus
 
           }
@@ -104,16 +104,16 @@ export class PostPageComponent implements OnInit {
             // this.showScrollbar = false
           }
 
-        }, 2000); //using timeout fuctino..
+        }, 2000 ); //using timeout fuctino..
 
 
 
-      } catch (error) {
+      } catch ( error ) {
       }
     }
   }
 
-  selectedBook_(obj) {
+  selectedBook_( obj ) {
     this.selectedBook = obj
 
 
@@ -126,7 +126,7 @@ export class PostPageComponent implements OnInit {
 
     var string = "";
     var tel;
-    for (var i in this.selectedBook.isbn) {
+    for ( var i in this.selectedBook.isbn ) {
 
       string = string + this.selectedBook.isbn[i].identifier + "\n";
     }
@@ -145,14 +145,15 @@ export class PostPageComponent implements OnInit {
       price: this.price,
       authors: this.selectedBook.author,
       image: this.selectedBook.image,
-      phoneNumber: (this.telephone) ? this.telephone : 'NA',
+      phoneNumber: ( this.telephone ) ? this.telephone : 'NA',
       timeStamp: new Date().getTime(),
       postedDate: new Date().toDateString()
     }
 
-    this.postBookService.postBook(obj);
-    $("#exampleModal .close").click();
-    this.backend.displayAlert("Great", "You have succesffullly submitted your book", "success");
+    this.postBookService.postBook( obj );
+    obj = {}
+    $( "#exampleModal .close" ).click();
+    this.backend.displayAlert( "Great", "You have succesffullly submitted your book", "success" );
 
   }
 

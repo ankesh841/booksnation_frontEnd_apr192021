@@ -37,7 +37,18 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { PostPageComponent } from './post-page/post-page.component';
 import { PostedBooksComponent } from './posted-books/posted-books.component';
 
+import { PostPageWithDetailsComponent } from './post-page-with-details/post-page-with-details.component';
+
+// import { FacebookModule } from 'ngx-facebook';
+
+
 const appRoutes: Routes = [
+
+  {
+    path: "postwithdetails",
+    component: PostPageWithDetailsComponent
+  },
+
   {
     path: "login",
     component: LoginComponent,
@@ -64,7 +75,7 @@ const appRoutes: Routes = [
 
 ];
 
-@NgModule({
+@NgModule( {
   declarations: [
     AppComponent,
     AbbrComponent,
@@ -72,7 +83,8 @@ const appRoutes: Routes = [
     LoginComponent,
     NavigationComponent,
     PostPageComponent,
-    PostedBooksComponent
+    PostedBooksComponent,
+    PostPageWithDetailsComponent
   ],
   imports: [
     NgbModule,
@@ -88,7 +100,7 @@ const appRoutes: Routes = [
     FormsModule,
     BrowserAnimationsModule,
     MatSelectModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp( environment.firebase ),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     MatButtonModule,
@@ -96,16 +108,18 @@ const appRoutes: Routes = [
     MatGridListModule,
     MatInputModule,
     MatProgressBarModule,
-    SweetAlert2Module.forRoot({
+    // FacebookModule.forRoot(),
+
+    SweetAlert2Module.forRoot( {
       buttonsStyling: false,
       customClass: "modal-content",
       confirmButtonClass: "btn btn-primary",
       cancelButtonClass: "btn"
-    }),
+    } ),
     RecaptchaModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot( appRoutes )
   ],
   providers: [],
   bootstrap: [AppComponent],
-})
+} )
 export class AppModule { }

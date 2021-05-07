@@ -43,6 +43,7 @@
     "instantsearch.js": "^3.2.1",
     "ng-recaptcha": "^4.2.1",
     "ngx-captcha": "^6.2.1",
+    "ngx-facebook": "^3.0.0-0",
     "ngx-progressbar": "^2.1.1",
     "ngx-tooltip": "0.0.9",
     "nodemailer-postmark-transport": "^1.4.0",
