@@ -242,10 +242,11 @@
   <!-- showing no result. -->
   <div id="resultDiv_2" class="card card-body mt-4 container" *ngIf="searchChangeData?.length === 0">
     <p class="display-4 text-center alert alert-danger" style="font-size:2.2em; font-weight: 700;">Results: <span
-        class="text-muted" style="font-size:0.8em">This book is not
+        class="text-muted" style="font-size:0.8em"><u>"{{searchQuery}}"</u> is not
         available </span></p>
     <div class="card my-4 mt-4">
-      <div id="search_text" class="card-header  " style="background-color: #dc3545; color:white;"> Can't Find your
+      <!-- dc3545 -->
+      <div id="search_text" class="card-header  " style="background-color: #1B998B; color:white;"> Can't Find your
         Text-Book ? </div>
       <div class="card-body">
         <div class="card-body row">
@@ -272,21 +273,16 @@
       data-dismiss="modal">Close</button>
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-        <div class="modal-body">
+        <div class="card modal-body">
           <div class="container" style="width:100% ; margin-top: -10px">
             <!-- if not logged in let user log in. -->
             <div *ngIf="!loggedIn" class="row">
-              <div class="col-12 mx-auto">
+              <div class="col-12 mx-auto ">
                 <div class="">
-                  <div class="">
+                  <div class="card-body">
                     <button type="button" class="close" id="close_modal" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
-                    <!-- <div class="display-4" style="font-size:1.9em; "><span
-                        style="font-weight: 700;  padding: 10px 17px; color: white;" class="bg-warning"> Sign in</span>
-                      <span style="font-size: 0.8em;"> to Continue.</span>
-                    </div>
-                    <hr style="margin-top: 2.1em;"> -->
                     <div class="text-center mt-4">
                       <span style="font-size: 1.9em; font-weight:700; padding:10px 17px; color:white;"
                         class="text-center display-4 bg-warning">
@@ -303,12 +299,20 @@
                           <input matInput placeholder="Email" type="text" class="form-control" style="display: block;"
                             [(ngModel)]="mail" #email="ngModel" [ngClass]="{'is-invalid':f.submitted && email.invalid}"
                             name="email" required email />
+                          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">Email must be a valid email Address</div>
+                          </div>
                         </mat-form-field>
                         <mat-form-field class="width_" style="display:block">
                           <input matInput placeholder="Password" type="password" class="form-control"
                             style="border:2 px solid red" [(ngModel)]="pass" #password="ngModel"
                             [ngClass]="{'is-invalid':f.submitted && password.invalid}" name="password" minlength="6"
                             required password />
+                          <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+                            <div *ngIf="password.errors.required">Password is required.</div>
+                            <div *ngIf="password.errors.minlength">Password must be of 6 characters.</div>
+                          </div>
                         </mat-form-field>
                       </div>
                       <div class="text-center">
@@ -319,6 +323,8 @@
                           (click)="createUsernamePassword(email.value,password.value);" type="submit">Sign Up</button>
                       </div>
                     </form>
+                    <mat-progress-bar mode="indeterminate" *ngIf="loginProgressBar">
+                    </mat-progress-bar>
                     <!-- <hr class="my-4"> -->
                     <!-- <button class="btn btn-lg btn-google btn-block" type="submit" (click)="signInWithGoogle();">
                       <i class="fa fa-google fa-fw mr-2"></i> Google SignIn
@@ -336,10 +342,14 @@
             <div *ngIf="loggedIn">
               <div>
                 <div class="card my-3">
-                  <div class="card-header">create an Alert Notification </div>
+                  <div class="card-header"> <span class="bg-warning my-2" style="color:white; padding:10px 17px;">
+                      Creat Alert
+                      Notification
+                    </span> </div>
                   <!-- search bar  -->
                   <div class="card-body">
-                    <p class="display-4 mt-3  " style="font-size:1.6em"><i class="fa fa-arrow-right"></i> Step 1:
+                    <p class="display-4 mt-3 bg-danger text-white  " style="font-size:1.6em; padding: 10px 17px;"><i
+                        class="fa fa-arrow-right"></i> Step 1:
                       Search.
                     </p>
                     <mat-progress-bar mode="query" *ngIf="searchBar">
@@ -358,8 +368,8 @@
                 <div class="alert alert-danger mt-2" *ngIf="searchBookError">{{searchBookError}}</div>
                 <!-- results -->
                 <div *ngIf="showScrollbar" id="resultDiv__" class="mt-3">
-                  <p class="display-4 mt-3  " *ngIf="!searchBookError" style="font-size:1.6em"><i
-                      class="fa fa-arrow-right"></i> Step 2:
+                  <p class="display-4 mt-3 bg-danger text-white  " *ngIf="!searchBookError"
+                    style="font-size:1.6em; padding: 10px 17px;"><i class="fa fa-arrow-right"></i> Step 2:
                     select book.
                   </p>
                   <div id="style-1" *ngIf="!searchBookError" class="scrollBar_search_login text-center">
@@ -405,7 +415,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="notificationModal0">Notification
+          <h5 class="modal-title bg-danger text-white" style="padding: 10px 17px; " id="notificationModal0">Notification
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -433,7 +443,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="createNotification()">Create Notification</button>
+          <button type="button" class="btn  btn-large btn-danger" (click)="createNotification()">Create
+            Notification</button>
         </div>
       </div>
     </div>

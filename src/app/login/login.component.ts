@@ -215,7 +215,7 @@ export class LoginComponent implements OnInit {
       temp = error.message;
 
     } ).then( a => {
-      console.log( temp )
+      // console.log( temp )
       this.errorMessage = temp;
       this.cdRef.detectChanges();
     } )

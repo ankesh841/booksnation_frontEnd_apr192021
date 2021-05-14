@@ -27,8 +27,8 @@ export class BackendService {
 
   sendDataBool = false;
   // 
-  // private rootUrl = "http://localhost:3000";
-  private rootUrl = ".."; //if uploading..
+  private rootUrl = "http://localhost:3000";
+  // private rootUrl = ".."; //if uploading..
   // 
   //  private rootUrl = "https://booksnation-working.herokuapp.com";
 
@@ -104,7 +104,7 @@ export class BackendService {
 
 
   getUserDetail( uid ) {
-    console.log( uid )
+    // console.log( uid )
 
     var obj = {
       uid: uid
@@ -138,7 +138,7 @@ export class BackendService {
     var obj = {
       uid: uid
     }
-    console.log( obj )
+    // console.log( obj )
     return this.http.post( this.rootUrl + "/submittedBooksData", obj, this.httpOptions );
   }
 

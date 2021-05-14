@@ -77,7 +77,11 @@ export class PostPageWithDetailsComponent implements OnInit {
   }
   mannualBookNameSearch( search: string ) {
 
-    search = this.backend.inputFilter( search );
+    // search = this.backend.inputFilter( search );
+
+
+
+
     // if ( !this.department && !this.course ) {
     //   this.searchBookError = "Select Department and Course"
     //   this.backend.hidingKeyboard();
@@ -93,7 +97,7 @@ export class PostPageWithDetailsComponent implements OnInit {
         this.bookSearch = result; //assigning it to the var.
         this.showScrollbar = true;  //showing div
         setTimeout( () => {
-          if ( result.length > 8 ) {
+          if ( result.length > 1 ) {
             this.searchingBar = false;
             var elmnt = document.getElementById( "resultDiv" );
             elmnt.scrollIntoView(); //showing the result div focus

@@ -35,19 +35,20 @@ export class AbbrComponent implements OnInit {
 
     this.backend.algoliaSearch_showing_all_available_book().subscribe( temp => {
       this.showing_all_available_books = temp;
-      console.log( 'calling first' )
+      // console.log( 'calling first' )
       console.log( temp )
+      // console.log( temp )
     }
 
       ,
       af => {
-        console.log( 'calleding seecond' )
-        console.log( this.showing_all_available_books )
+        // console.log( 'calleding seecond' )
+        // console.log( this.showing_all_available_books )
       }
       ,
       () => {
-        console.log( this.showing_all_available_books )
-        console.log( 'done' )
+        // console.log( this.showing_all_available_books )
+        // console.log( 'done' )
       }
 
 
@@ -98,7 +99,7 @@ export class AbbrComponent implements OnInit {
     this.backend.algoliaSearchBackend( event, whichIndex ).subscribe( temp => {
       this.searchChangeData = temp
 
-      console.log( temp )
+      // console.log( temp )
 
     } )
     setTimeout( () => {
@@ -159,13 +160,13 @@ export class AbbrComponent implements OnInit {
 
   algoliaAllAvailable() {
 
-    console.log( 'algolia search available' )
+    // console.log( 'algolia search available' )
 
     this.backend.algoliaSearch_showing_all_available_book().subscribe( temp => {
       this.showing_all_available_books = temp;
     } )
 
-    console.log( this.showing_all_available_books );
+    // console.log( this.showing_all_available_books );/
 
   }
 
@@ -179,7 +180,7 @@ export class AbbrComponent implements OnInit {
     var phone;
     for ( var i = 0; i < this.searchChangeData.length; i++ ) {
       if ( this.searchChangeData[i].childValue === childValue ) {
-        console.log( this.searchChangeData[i].seller_emaiL )
+        // console.log( this.searchChangeData[i].seller_emaiL )
 
         if ( this.searchChangeData[i].phoneNumber === undefined ) {
           phone = "NA"
@@ -214,7 +215,7 @@ export class AbbrComponent implements OnInit {
 
   resolved_showing_allAvailable( childValue ) {
     var phone;
-    console.log( childValue )
+    // console.log( childValue )
 
     for ( var i = 0; i < this.showing_all_available_books.length; i++ ) {
       if ( this.showing_all_available_books[i].childValue === childValue ) {
@@ -258,19 +259,26 @@ export class AbbrComponent implements OnInit {
   errorMessage;
   //////////////////////////////////////////////////////////////////////////////////////////
   createUsernamePassword( email, password ) {
+    this.loginProgressBar = true;
+
     if ( email != "example@example.com" ) {
-      this.errorMessage = "";
+      this.errorMessage = " ";
       var temp = "";
       this.authorization.createUsernamePassword( email, password ).then( res => {
         if ( res.user ) {
+          this.loginProgressBar = false;
+
           this.globalUser = res.user;
           // this.loggedIn_alert = true; //showing sign in modal to let user sign in to create alert..
           // this.loggedIn_alert_option = true; //after sign in show modal for user to select the book..
           this.cdRef.detectChanges();
         }
       } ).catch( function ( error ) {
+
         temp = error.message;
       } ).then( a => {
+        this.loginProgressBar = false;
+
         this.errorMessage = this.backend.displayError( temp );
         temp.length > 20 ? console.log( '' ) :
           $( "#login_modal .close" ).click()
@@ -393,12 +401,18 @@ export class AbbrComponent implements OnInit {
   globalUser;
   searchBar: boolean;
 
+  loginProgressBar;
 
   loginUsernamePassword( email, password ) {
+
+    this.loginProgressBar = true;
+
     this.globalUser = "";
-    var tempError = "";
+    var tempError = " ";
     this.authorization.loginUsernamePassword( email, password ).then( res => {
       if ( res.user ) {
+        this.loginProgressBar = false
+
         this.globalUser = res.user;
         // this.loggedIn_alert = true; //showing sign in modal to let user sign in to create alert..
         // this.loggedIn_alert_option = true; //after sign in show modal for user to select the book..
@@ -407,8 +421,12 @@ export class AbbrComponent implements OnInit {
         console.log( 'cant signed..error' )
       }
     } ).catch( function ( error ) {
-      tempError = error;
+      tempError = error.message;
     } ).then( a => {
+      this.loginProgressBar = false;
+      this.errorMessage = tempError;
+
+      // console.log( tempError, 'error message' )
       this.errorMessage = this.backend.displayError( tempError );
     } );
   }
